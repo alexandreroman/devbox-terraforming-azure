@@ -1,0 +1,6 @@
+az_location  = "francecentral"
+az_res_group = "devbox"
+
+devbox_user_login       = "devuser"
+devbox_user_ssh_public  = "~/.ssh/id_rsa.pub"
+devbox_user_ssh_private = "~/.ssh/id_rsa"
