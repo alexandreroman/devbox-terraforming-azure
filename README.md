@@ -1,4 +1,3 @@
-
 # Terraforming a devbox VM in Azure
 
 Using this project, you can create a virtual machine in Azure which includes
@@ -44,8 +43,8 @@ starting from [terraform.tfvars.template](terraform.tfvars.template):
 az_location  = "francecentral"
 az_res_group = "devbox"
 
-devbox_user_login      = "devuser"
-devbox_user_ssh_public = "~/.ssh/id_rsa.pub"
+devbox_user_login       = "devuser"
+devbox_user_ssh_public  = "~/.ssh/id_rsa.pub"
 devbox_user_ssh_private = "~/.ssh/id_rsa"
 ```
 
@@ -65,6 +64,11 @@ ssh -i ~/.ssh/id_rsa devuser@$(terraform output -raw devbox_public_ip_address)
 ```
 
 The VM will be automatically shut down every day at 9:00 PM.
+Use this command to start the VM:
+
+```shell
+az vm start -g devbox -n devbox
+```
 
 Use this command to destroy the VM (everything will be destroyed!):
 
