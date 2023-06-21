@@ -40,7 +40,6 @@ If you need to add your own settings, create a file `terraform.tfvars`
 starting from [terraform.tfvars.template](terraform.tfvars.template):
 
 ```tfvars
-az_location  = "francecentral"
 az_res_group = "devbox"
 
 devbox_user_login       = "devuser"

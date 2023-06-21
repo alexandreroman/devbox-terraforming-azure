@@ -20,7 +20,7 @@ data "azurerm_resource_group" "devbox" {
 resource "azurerm_virtual_network" "devbox" {
   name                = "devbox-vnet"
   address_space       = ["10.0.0.0/16"]
-  location            = var.az_location
+  location            = data.azurerm_resource_group.devbox.location
   resource_group_name = data.azurerm_resource_group.devbox.name
 }
 
@@ -33,7 +33,7 @@ resource "azurerm_subnet" "devbox" {
 
 resource "azurerm_network_interface" "devbox" {
   name                = "devbox-nic"
-  location            = var.az_location
+  location            = data.azurerm_resource_group.devbox.location
   resource_group_name = data.azurerm_resource_group.devbox.name
 
   ip_configuration {
@@ -47,7 +47,7 @@ resource "azurerm_network_interface" "devbox" {
 resource "azurerm_public_ip" "devbox-ip" {
   name                = "devbox-ip"
   resource_group_name = data.azurerm_resource_group.devbox.name
-  location            = var.az_location
+  location            = data.azurerm_resource_group.devbox.location
   allocation_method   = "Static"
   lifecycle {
     create_before_destroy = true
@@ -57,7 +57,7 @@ resource "azurerm_public_ip" "devbox-ip" {
 resource "azurerm_network_security_group" "devbox-nsg" {
   name                = "devbox-nsg"
   resource_group_name = data.azurerm_resource_group.devbox.name
-  location            = var.az_location
+  location            = data.azurerm_resource_group.devbox.location
 
   security_rule {
     name                       = "SSH"
@@ -75,7 +75,7 @@ resource "azurerm_network_security_group" "devbox-nsg" {
 resource "azurerm_linux_virtual_machine" "devbox" {
   name                = "devbox"
   resource_group_name = data.azurerm_resource_group.devbox.name
-  location            = var.az_location
+  location            = data.azurerm_resource_group.devbox.location
   size                = var.devbox_vm_size
 
   network_interface_ids = [
@@ -131,7 +131,7 @@ resource "azurerm_linux_virtual_machine" "devbox" {
 
 resource "azurerm_dev_test_global_vm_shutdown_schedule" "devbox-auto-shutdown" {
   virtual_machine_id = azurerm_linux_virtual_machine.devbox.id
-  location           = var.az_location
+  location           = data.azurerm_resource_group.devbox.location
   enabled            = var.devbox_shutdown_enabled
 
   daily_recurrence_time = var.devbox_shutdown_time
