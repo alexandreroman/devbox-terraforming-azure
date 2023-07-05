@@ -94,7 +94,7 @@ if [ ! -f /opt/apache-maven/bin/mvn ]; then
   mkdir /tmp/maven && \
   mkdir /opt/apache-maven && \
   cd /tmp/maven && \
-  curl -L https://dlcdn.apache.org/maven/maven-3/3.9.2/binaries/apache-maven-3.9.2-bin.tar.gz -o apache-maven.tar.gz && \
+  curl -L https://dlcdn.apache.org/maven/maven-3/3.9.3/binaries/apache-maven-3.9.3-bin.tar.gz -o apache-maven.tar.gz && \
   tar zxf apache-maven.tar.gz --strip-components=1 -C /opt/apache-maven && \
   echo "MAVEN_HOME=/opt/apache-maven" >> /home/$DEVBOX_USER/.bashrc && \
   echo "PATH=\$PATH:\$MAVEN_HOME/bin" >> /home/$DEVBOX_USER/.bashrc
